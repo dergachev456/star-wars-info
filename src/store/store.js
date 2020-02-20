@@ -3,7 +3,7 @@ import rootReducer from './reducers/index';
 import { save } from 'redux-localstorage-simple';
 import thunk from 'redux-thunk';
 
-const middleware = [save({ namespace: 'redux-intro'}), thunk];
+const middleware = [save({ namespace: 'swapi'}), thunk];
 
 const store = createStore(
     rootReducer,

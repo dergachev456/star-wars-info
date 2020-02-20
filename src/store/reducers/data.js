@@ -1,7 +1,7 @@
-import { LOAD_DATA } from '../constants';
+import { LOAD_DATA,  } from '../constants';
 import { load } from 'redux-localstorage-simple';
 
-let DATA = load({ namespace: 'redux-intro' });
+let DATA = load({ namespace: 'swapi' });
 
 if (!DATA || !DATA.data ) {
     DATA = {
@@ -16,13 +16,14 @@ export default function (state = DATA.data, action) {
         case LOAD_DATA:
             return {
                 ...state,
-                data: action.payload
-                // films: action.payload.films,
-                // people: action.payload.people,
-                // vehicles: action.payload.vehicles,
-                // starships: action.payload.starships,
-                // species: action.payload.species,
-                // planets: action.payload.planets
+                // data: action.payload
+                films: action.payload.films,
+                people: action.payload.people,
+                vehicles: action.payload.vehicles,
+                starships: action.payload.starships,
+                species: action.payload.species,
+                planets: action.payload.planets,
+                isLoaded: action.payload.isLoaded
             };
         default:
             return state;
