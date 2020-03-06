@@ -11,16 +11,7 @@ export default class EntityPage extends Component {
     onChangeSelectedEntity = value => {
         this.setState({ selectedEntity: value });
     }
-    sortBy = (arr, param, orderToHight) => {
-        let obj = [...arr];
-        if (orderToHight === false) {
-            obj.sort((a, b) => a[param] < b[param] ? 1 : -1);
-        } else {
-            obj.sort((a, b) => a[param] > b[param] ? 1 : -1);
-        }
-        return obj;
-    }
-    sortData = () => {
+    changeOrder = () => {
         this.setState(prevState => ({ sortOrderToHeight: !prevState.sortOrderToHeight }))
     }
     switchSelectedEntity = (value, src) => {
@@ -47,25 +38,28 @@ export default class EntityPage extends Component {
     }
     render() {
         const { selectedEntity, sortOrderToHeight, searchText } = this.state;
-        const { getId } = this.props;
-        let data = this.switchSelectedEntity(selectedEntity, this.props.data)
+        const { getId, sortBy, filterBy } = this.props;
+        const data = this.switchSelectedEntity(selectedEntity, this.props.data)
         let sortedData;
+        let filteredData;
 
         if (selectedEntity === 'films') {
-            sortedData  = this.sortBy(data, 'title', sortOrderToHeight)
+            sortedData = sortBy(data, 'title', sortOrderToHeight)
+            filteredData = filterBy(sortedData, 'title', searchText)
         } else {
-            sortedData  = this.sortBy(data, 'name', sortOrderToHeight)
-        }
+            sortedData = sortBy(data, 'name', sortOrderToHeight)
+            filteredData = filterBy(sortedData, 'name', searchText)
+        } 
         return (
             <div>
                 <EntitiesList
                     onChangeSelectedEntity={this.onChangeSelectedEntity}
                 />
                 <Entity
-                    data={sortedData}
+                    data={filteredData}
                     getId={getId}
                     selectedEntity={selectedEntity}
-                    sortData={this.sortData}
+                    changeOrder={this.changeOrder}
                     sortOrderToHeight={sortOrderToHeight}
                     onChangeSearchText={this.onChangeSearchText}
                     searchText={searchText}

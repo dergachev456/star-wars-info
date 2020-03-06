@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
-import EntityPage from './EntityPage'
+import EntitiesPage from './EntitiesPage'
 import { connect } from 'react-redux';
 
 class EntityPageContainer extends Component {
     render() {
-        const { data, getId } = this.props;
+        const { data, getId, sortBy, filterBy } = this.props;
         return (
-            <EntityPage
+            <EntitiesPage
                 data={data}
                 getId={getId}
+                sortBy={sortBy}
+                filterBy={filterBy}
             />
         )
     }

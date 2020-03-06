@@ -15,7 +15,7 @@
     "redux-localstorage-simple": "^2.1.6",
     "redux-thunk": "^2.3.0"
   },
-  "proxy": "https://swapi.co/",
+  "proxy": "https://demo9165932.mockable.io/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

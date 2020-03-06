@@ -3,16 +3,11 @@ import './Entity.css'
 import { Link } from 'react-router-dom'
 
 export default class Entity extends Component {
-    state = {
-        selectedEntity: '',
-    }
     render() {
-        const { selectedEntity, onChangeSearchText, searchText, getId, data, sortData } = this.props;
-        const {  sortOrderToHeight } = this.props;
-
+        const { selectedEntity, onChangeSearchText, searchText, getId, data, changeOrder, sortOrderToHeight } = this.props;
         return (
             <div className="entity">
-                <div onClick={sortData} className="entity__title-container">
+                <div onClick={changeOrder} className="entity__title-container">
                     <h1 className="entity__title" >{selectedEntity}</h1>
                     {
                         sortOrderToHeight ? (<span className="entity__arrow">&#8595;</span>) : (<span className="entity__arrow">&#8593;</span>)
