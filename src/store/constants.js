@@ -1,1 +1,7 @@
 export const LOAD_DATA = 'LOAD_DATA';
+
+export const SET_SELECTED_ENTITY = 'SET_SELECTED_ENTITY';
+
+export const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
+
+export const SWITCH_SORT_ORDER = 'SWITCH_SORT_ORDER';

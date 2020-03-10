@@ -10,67 +10,29 @@ import './App.css'
 import SingleEntityPageContainer from './components/SingleEntityPage/SingleEntityPageContainer';
 
 class App extends Component {
-
   componentDidMount() {
     if (JSON.parse(localStorage.getItem('swapi')) === null) {
       this.props.loadData();
     }
   }
 
-  getId = (url) => {
-    const array = url.split('/');
-    return array[array.length - 2];
-  }
-
-  getEntity = (url) => {
-    const array = url.split('/');
-    return array[array.length - 3];
-  }
-
-  sortBy = (arr, param, orderToHight) => {
-    let obj = [...arr];
-    if (orderToHight === false) {
-      obj.sort((a, b) => a[param] < b[param] ? 1 : -1);
-    } else {
-      obj.sort((a, b) => a[param] > b[param] ? 1 : -1);
-    }
-    return obj;
-  }
-
-  filterBy = (arr, param, value) => {
-    const result = arr.filter(elem => {
-      return elem[param].toLowerCase().includes(value.toLowerCase())
-    })
-    return result;
-  }
-
   render() {
     const { isLoaded } = this.props.data;
     return (
-      <div>
-        <HashRouter>
-          <Header />
-          {
-            !isLoaded && <Loader />
-          }
-          {
-            isLoaded && (
-              <Switch>
-                <Route exact path='/' render={() => <EntitiesPageContainer
-                  getId={this.getId}
-                  sortBy={this.sortBy}
-                  filterBy={this.filterBy}
-                />} />
-                <Route exact path='/:entity/:id' render={(props) => <SingleEntityPageContainer
-                  {...props}
-                  getId={this.getId}
-                  getEntity={this.getEntity}
-                />} />
-              </Switch>
-            )
-          }
-        </HashRouter>
-      </div>
+      <HashRouter>
+        <Header />
+        {
+          !isLoaded && <Loader />
+        }
+        {
+          isLoaded && (
+            <Switch>
+              <Route exact path='/' component={EntitiesPageContainer}/>
+              <Route exact path='/:entity/:id' component={SingleEntityPageContainer} />
+            </Switch>
+          )
+        }
+      </HashRouter>
     )
   }
 }
@@ -80,3 +42,4 @@ export default connect(state => ({
 }), {
   loadData
 })(App);
+

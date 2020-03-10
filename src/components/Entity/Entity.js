@@ -3,17 +3,20 @@ import './Entity.css'
 import { Link } from 'react-router-dom'
 
 export default class Entity extends Component {
+    onChangeSearchText = event => {
+        this.props.setSearchText(event.target.value);
+    }
     render() {
-        const { selectedEntity, onChangeSearchText, searchText, getId, data, changeOrder, sortOrderToHeight } = this.props;
+        const { selectedEntity, searchText, getId, data, switchSortOrder, sortOrderToHeight } = this.props;
         return (
             <div className="entity">
-                <div onClick={changeOrder} className="entity__title-container">
+                <div onClick={switchSortOrder} className="entity__title-container">
                     <h1 className="entity__title" >{selectedEntity}</h1>
                     {
                         sortOrderToHeight ? (<span className="entity__arrow">&#8595;</span>) : (<span className="entity__arrow">&#8593;</span>)
                     }
                 </div>
-                <input placeholder="search.." className="entity__input" value={searchText} onChange={onChangeSearchText} type="search" />
+                <input placeholder="search.." className="entity__input" value={searchText} onChange={this.onChangeSearchText} type="search" />
                 <div className="entity__cards">
                     {
                         data && data.map(obj => {

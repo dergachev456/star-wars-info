@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './EntitiesList.css'
-
 export default class EntitiesList extends Component {
     state = {
         entities: [
@@ -14,14 +13,14 @@ export default class EntitiesList extends Component {
     }
     render() {
         const { entities } = this.state;
-        const { onChangeSelectedEntity } = this.props;
+        const { setSelectedEntity } = this.props;
         return (
             <div className="entities-list">
                 {
                     entities && entities.map(entity => {
                         return (
                             <div
-                                onClick={() => onChangeSelectedEntity(entity.name)}
+                                onClick={() => setSelectedEntity(entity.name)}
                                 key={entity.id}
                                 className="entities-list__entity"
                             >
