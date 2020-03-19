@@ -54,7 +54,6 @@ export const loadData = () => async dispatch => {
             planets,
             starships,
             species,
-            isLoaded: true
         }
     })
 };

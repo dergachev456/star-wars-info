@@ -5,10 +5,15 @@ import { setSelectedEntity } from '../../store/actions/mainActonCreator';
 
 class EntitiesListContainer extends Component {
     render() {
-        const { setSelectedEntity } = this.props;
+        const { setSelectedEntity, data } = this.props;
         return (
-            <EntitiesList setSelectedEntity={setSelectedEntity} />
+            <EntitiesList
+                setSelectedEntity={setSelectedEntity}
+                entities={Object.keys(data)}
+            />
         )
     }
 }
-export default connect(null,{setSelectedEntity})(EntitiesListContainer);
+export default connect(state => ({
+    data: state.data,
+}), { setSelectedEntity })(EntitiesListContainer);

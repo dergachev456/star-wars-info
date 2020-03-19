@@ -3,11 +3,26 @@ import { connect } from 'react-redux';
 import { loadData } from './store/actions/dataActionCreator';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import Header from './components/Header/Header'
-import Loader from './components/Loader/Loader'
 import EntitiesPageContainer from './components/EntitiesPage/EntitiesPageContainer';
-
+import LoadingHOC from './components/HOCs/LoadingHOC'
 import './App.css'
 import SingleEntityPageContainer from './components/SingleEntityPage/SingleEntityPageContainer';
+
+class AppComponentUI extends Component {
+  render() {
+    return (
+      <HashRouter>
+        <Header />
+        <Switch>
+          <Route exact path='/' component={EntitiesPageContainer} />
+          <Route exact path='/:entity/:id' component={SingleEntityPageContainer} />
+        </Switch>
+      </HashRouter>
+    )
+  }
+}
+
+const AppComponent = LoadingHOC('data')(AppComponentUI);
 
 class App extends Component {
   componentDidMount() {
@@ -17,22 +32,8 @@ class App extends Component {
   }
 
   render() {
-    const { isLoaded } = this.props.data;
     return (
-      <HashRouter>
-        <Header />
-        {
-          !isLoaded && <Loader />
-        }
-        {
-          isLoaded && (
-            <Switch>
-              <Route exact path='/' component={EntitiesPageContainer}/>
-              <Route exact path='/:entity/:id' component={SingleEntityPageContainer} />
-            </Switch>
-          )
-        }
-      </HashRouter>
+      <AppComponent data={this.props.data} />
     )
   }
 }
