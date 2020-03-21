@@ -5,11 +5,11 @@ export default function EntitiesList(props) {
     return (
         <div className="entities-list">
             {
-                entities.map(entity => {
+                entities.map((entity, index) => {
                     return (
                         <div
                             onClick={() => setSelectedEntity(entity)}
-                            key={entity + Math.random()}
+                            key={entity + index}
                             className="entities-list__entity"
                         >
                             <button className="entities-list__entity-title">{entity}</button>

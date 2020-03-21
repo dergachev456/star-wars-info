@@ -1,55 +1,33 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import './SingleEntityPage.css'
-import Film from '../Film';
-import Person from '../Person';
-import Planet from '../Planet';
-import Species from '../Species';
-import Vehicle from '../Vehicle';
-import Starship from '../Starship';
 export default class SingleEntityPage extends Component {
-    getLinks = (arr) => {
-        const { getId, getEntity, data } = this.props;
-        return arr.map(elem => {
-            let entity = getEntity(elem);
-            let id = getId(elem);
-            let obj = data[entity].find(elem => getId(elem.url) === id);
-            if (obj.title !== undefined) {
-                return (
-                    <Link className="single-entity__link" key={obj.url} to={`/${entity}/${id}`}>{obj.title}</Link>
-                )
-            } else {
-                return (
-                    <Link className="single-entity__link" key={obj.url} to={`/${entity}/${id}`}>{obj.name}</Link>
-                )
-            }
-        })
-    }
     render() {
-        const { entity, id, data, getId } = this.props;
-        const currentEntity = data[entity].find(elem => getId(elem.url) === id);
+        const { fieldsToRender, getLinks, entity } = this.props;
         return (
-            <>
+            <div className="single-entity">
                 {
-                    (entity === 'films') && currentEntity && <Film getLinks={this.getLinks} data={currentEntity} />
-
+                    Object.keys(fieldsToRender).map(field => {
+                        if (field === 'name') {
+                            return <h1 className="single-entity__main-title">{entity[fieldsToRender[field]]}</h1>
+                        } else if (Array.isArray(entity[field])) {
+                            return (
+                                <>
+                                    {
+                                        entity[fieldsToRender[field]].length > 0 && <h2 className="single-entity__title">{`${field}:`}</h2>
+                                    }
+                                    <div className="single-entity__container">
+                                        {
+                                            getLinks(entity[fieldsToRender[field]])
+                                        }
+                                    </div>
+                                </>
+                            )
+                        } else {
+                            return <h2 className="single-entity__title">{`${field}: ${entity[fieldsToRender[field]]}`}</h2>
+                        }
+                    })
                 }
-                {
-                    (entity === 'people') && currentEntity && <Person getLinks={this.getLinks} data={currentEntity} />
-                }
-                {
-                    (entity === 'planets') && currentEntity && <Planet getLinks={this.getLinks} data={currentEntity} />
-                }
-                {
-                    (entity === 'species') && currentEntity && <Species getLinks={this.getLinks} data={currentEntity} />
-                }
-                {
-                    (entity === 'vehicles') && currentEntity && <Vehicle getLinks={this.getLinks} data={currentEntity} />
-                }
-                {
-                    (entity === 'starships') && currentEntity && <Starship getLinks={this.getLinks} data={currentEntity} />
-                }
-            </>
+            </div>
         )
     }
 }

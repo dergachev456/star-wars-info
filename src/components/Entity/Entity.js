@@ -19,7 +19,7 @@ export default class Entity extends Component {
                 <input placeholder="search.." className="entity__input" value={searchText} onChange={this.onChangeSearchText} type="search" />
                 <div className="entity__cards">
                     {
-                        data && data.map(obj => {
+                        data.map(obj => {
                             return (
                                 <div key={getId(obj.url)} className="entity__card">
                                     <Link className="entity__link" to={`/${selectedEntity}/${getId(obj.url)}`}>{obj.name || obj.title}</Link>
