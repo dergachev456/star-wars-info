@@ -1,4 +1,4 @@
-const fieldsToRender = {
+const fieldsToDisplay = {
     films: {
         name: 'title',
         director: 'director',
@@ -63,4 +63,4 @@ const fieldsToRender = {
     }
 }
 
-export default fieldsToRender;
+export default fieldsToDisplay;

@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import SingleEntityPage from './SingleEntityPage'
 import { getId, getEntity } from '../../functions'
 import { Link } from 'react-router-dom'
-import fieldsToRender from '../../fields_to_render'
-
+import fieldsToDisplay from '../../fields_to_display'
 
 class SingleEntityPageContainer extends Component {
 
@@ -25,22 +24,19 @@ class SingleEntityPageContainer extends Component {
             }
         })
     }
-
     render() {
         const { data } = this.props;
         const { entity, id } = this.props.match.params;
         const currentEntity = data[entity].find(elem => getId(elem.url) === id);
-
         return (
             <SingleEntityPage
-                fieldsToRender={fieldsToRender[entity]}
+                fieldsToRender={fieldsToDisplay[entity]}
                 getLinks={this.getLinks}
                 entity={currentEntity}
             />
         )
     }
 }
-
 export default connect(state => ({
     data: state.data,
 }))(SingleEntityPageContainer);
