@@ -5,9 +5,9 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import Header from './components/Header/Header'
 import EntitiesPageContainer from './components/EntitiesPage/EntitiesPageContainer';
 import LoadingHOC from './components/HOCs/LoadingHOC'
+import ErrorPage from './components/ErrorPage/ErrorPage'
 import './App.css'
 import SingleEntityPageContainer from './components/SingleEntityPage/SingleEntityPageContainer';
-
 class AppComponentUI extends Component {
   render() {
     return (
@@ -16,6 +16,7 @@ class AppComponentUI extends Component {
         <Switch>
           <Route exact path='/' component={EntitiesPageContainer} />
           <Route exact path='/:entity/:id' component={SingleEntityPageContainer} />
+          <Route component={ErrorPage} />
         </Switch>
       </HashRouter>
     )

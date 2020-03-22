@@ -1,8 +1,5 @@
 import { SET_SELECTED_ENTITY, SET_SEARCH_TEXT, SWITCH_SORT_ORDER} from '../constants';
 
-
-
-
 const initialState = {
     selectedEntity: 'films',
     searchText: '',
