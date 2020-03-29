@@ -7,7 +7,13 @@ import fieldsToDisplay from '../../fields_to_display'
 import ErrorPage from '../ErrorPage/ErrorPage';
 
 class SingleEntityPageContainer extends Component {
-
+    componentDidMount() {
+        window.scrollTo(0, 0);
+        
+    }
+    componentDidUpdate() {
+        window.scrollTo(0, 0);
+    }
     getLinks = (arr) => {
         const { data } = this.props;
         return arr.map(elem => {

@@ -32,6 +32,7 @@ class App extends Component {
     }
   }
 
+
   render() {
     return (
       <AppComponent data={this.props.data} />
