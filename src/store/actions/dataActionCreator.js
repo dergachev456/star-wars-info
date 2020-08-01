@@ -13,7 +13,7 @@ export const loadData = () => async dispatch => {
         let isNotLastPage = true;
         let pageNum = 1;
         do {
-            let response = await fetch(`https://swapi.co/api/${entity}/?page=${pageNum}`);
+            let response = await fetch(`https://swapi.dev/api/${entity}/?page=${pageNum}`);
             let data = await response.json()
             let results = data.results
             switch (entity) {

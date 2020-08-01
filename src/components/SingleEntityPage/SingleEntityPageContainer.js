@@ -9,7 +9,6 @@ import ErrorPage from '../ErrorPage/ErrorPage';
 class SingleEntityPageContainer extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
-        
     }
     componentDidUpdate() {
         window.scrollTo(0, 0);
